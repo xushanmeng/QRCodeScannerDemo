@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SurfaceView
+        android:id="@+id/sv_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
+
+    <RelativeLayout
+        android:id="@+id/layout_capture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.samonxu.qrcode.demo.view.CaptureView
+            android:id="@+id/cv_capture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+        <Button
+            android:id="@+id/btn_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/capture_album"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+
+        <CheckBox
+            android:id="@+id/cb_capture_flash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:button="@drawable/barcode_flashlight_selector" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48sp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/qrcode_back_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/capture_title"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

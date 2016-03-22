@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">QRCodeScannerDemo</string>
+    <string name="capture_camera_failed">Camera disabled</string>
+    <string name="capture_hint">Put the qrcode in frame</string>
+    <string name="capture_flash">flash</string>
+    <string name="capture_back">back</string>
+    <string name="capture_title">QRCode Scanner</string>
+    <string name="capture_album">album</string>
+    <string name="capture_decode_failed">No QRCode found</string>
+    <string name="capture_decode_result_title">Scan Result</string>
+    <string name="capture_decode_result_open">Open</string>
+    <string name="capture_decode_result_copy">Copy</string>
+    <string name="capture_decode_result_copy_hint">Already copy!</string>
+</resources>
