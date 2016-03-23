@@ -1,6 +1,8 @@
 package com.samonxu.qrcode.demo.camera;
 
 import android.content.Context;
+import android.graphics.ImageFormat;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Handler;
@@ -58,8 +60,8 @@ public class CameraManager implements Camera.AutoFocusCallback, Camera.PreviewCa
 		mCamera.setDisplayOrientation(90);
 		Camera.Parameters parameters = mCamera.getParameters();
 		cameraSize = getBestPreviewSize(parameters, screenSize);
-		// Rotate 90 degrees
 		parameters.setPreviewSize(cameraSize.height, cameraSize.width);
+		parameters.setPreviewFormat(ImageFormat.NV21);//Default
 		mCamera.setParameters(parameters);
 		try {
 			mCamera.setPreviewDisplay(holder);

@@ -6,10 +6,12 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -45,6 +47,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
     private static final long VIBRATE_DURATION = 200L;
     private static final int REQUEST_CODE_ALBUM = 0;
     public static final String EXTRA_RESULT = "result";
+    public static final String EXTRA_BITMAP = "bitmap";
 
     private SurfaceView previewSv;
     private CaptureView captureView;
@@ -54,7 +57,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
 
     private CameraManager mCameraManager;
     private DecodeThread mDecodeThread;
-    private Rect previewFramRect = null;
+    private Rect previewFrameRect = null;
     private boolean isDecoding = false;
 
     @Override
@@ -120,10 +123,10 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
         if (mDecodeThread != null) {
             mDecodeThread.cancel();
         }
-        if (previewFramRect == null) {
-            previewFramRect = mCameraManager.getPreviewFrameRect(captureView.getFrameRect());
+        if (previewFrameRect == null) {
+            previewFrameRect = mCameraManager.getPreviewFrameRect(captureView.getFrameRect());
         }
-        PlanarYUVLuminanceSource luminanceSource = new PlanarYUVLuminanceSource(data, dataSize, previewFramRect);
+        PlanarYUVLuminanceSource luminanceSource = new PlanarYUVLuminanceSource(data, dataSize, previewFrameRect);
         mDecodeThread = new DecodeThread(luminanceSource, CaptureActivity.this);
         isDecoding = true;
         mDecodeThread.execute();
@@ -134,8 +137,16 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(VIBRATE_DURATION);
         isDecoding = false;
+        if(bitmap.getWidth()>100||bitmap.getHeight()>100){
+            Matrix matrix = new Matrix();
+            matrix.postScale(100f/bitmap.getWidth(),100f/bitmap.getHeight());
+            Bitmap resizeBmp = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
+            bitmap.recycle();
+            bitmap = resizeBmp;
+        }
         Intent resultData = new Intent();
         resultData.putExtra(EXTRA_RESULT, result.getText());
+        resultData.putExtra(EXTRA_BITMAP, bitmap);
         setResult(RESULT_OK, resultData);
         finish();
     }

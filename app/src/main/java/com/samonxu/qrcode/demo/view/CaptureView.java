@@ -24,7 +24,6 @@ public class CaptureView extends View {
     private static final int MASK_COLOR = 0x80000000;
     private static final int POSSIBLE_POINT_COLOR = 0xC0FFFF00;
 
-    private static final int INVALIDATE_DELAYED_MS = 30;
     private static final int POSSIBLE_POINT_ALIVE_MS = 200;
     private static final int SCANNER_DURATION = 2000;
     private long startTime = -1;
@@ -122,7 +121,6 @@ public class CaptureView extends View {
         // Draw frame
         frameDrawable.draw(canvas);
 
-//        postInvalidateDelayed(INVALIDATE_DELAYED_MS);
         invalidate();
     }
 
